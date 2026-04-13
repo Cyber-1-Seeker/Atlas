@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/main.tsx","./src/types.ts","./src/api/client.ts","./src/components/Builder.tsx","./src/components/DirectionManager.tsx","./src/components/DirectionPicker.tsx","./src/components/JsonImport.tsx","./src/components/SkillTree.tsx","./src/components/TaskPanel.tsx","./src/store/useStore.ts"],"version":"5.9.3"}
