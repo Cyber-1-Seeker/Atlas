@@ -1,0 +1,493 @@
+/* ============================================================
+   PRACTICE PAGE — src/styles/Practice.css
+============================================================ */
+
+.practice-page {
+    min-height: 100vh;
+    animation: fadeUp 0.4s ease both;
+}
+
+/* ── HERO ────────────────────────────────────────────────── */
+.practice-hero {
+    padding: 48px 44px 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.practice-hero__glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 50% 60% at 80% 25%, rgba(168, 85, 247, 0.12) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 75%, rgba(232, 48, 74, 0.09) 0%, transparent 60%);
+}
+
+.practice-hero__eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--purple-glow);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.practice-hero__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+}
+
+.practice-hero__sub {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 580px;
+    position: relative;
+    z-index: 1;
+}
+
+/* stats row */
+.practice-stats {
+    display: flex;
+    gap: 12px;
+    margin-top: 28px;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+.practice-stat {
+    padding: 12px 18px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.practice-stat__val {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.practice-stat__lbl {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+/* ── SECTION CARDS ───────────────────────────────────────── */
+.practice-sections {
+    padding: 0 44px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.practice-section {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 22px;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.practice-section.open {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.practice-section__header {
+    padding: 22px 26px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+    position: relative;
+}
+
+.practice-section__header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.practice-section__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+}
+
+.practice-section.open .practice-section__icon {
+    transform: scale(1.05);
+}
+
+.practice-section__info {
+    flex: 1;
+}
+
+.practice-section__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.practice-section__tagline {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+.practice-section__meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.practice-section__count {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.practice-section__prog-track {
+    width: 60px;
+    height: 3px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+}
+
+.practice-section__prog-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width .4s var(--ease);
+}
+
+.practice-section__chevron {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s;
+}
+
+.practice-section.open .practice-section__chevron {
+    transform: rotate(180deg);
+}
+
+.practice-section__chevron svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-muted);
+}
+
+/* ── TECHNIQUES LIST ─────────────────────────────────────── */
+.techniques-list {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ── TECHNIQUE CARD ──────────────────────────────────────── */
+.technique-card {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    overflow: hidden;
+}
+
+.technique-card:last-child {
+    border-bottom: none;
+}
+
+.technique-card__header {
+    padding: 18px 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.technique-card__header:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.technique-card__check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.25s;
+    cursor: pointer;
+}
+
+.technique-card__check:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.technique-card.done .technique-card__check {
+    background: rgba(34, 197, 94, 0.15);
+    border-color: rgba(34, 197, 94, 0.5);
+}
+
+.technique-card__check svg {
+    width: 13px;
+    height: 13px;
+    color: #4ade80;
+}
+
+.technique-card__info {
+    flex: 1;
+}
+
+.technique-card__name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 3px;
+}
+
+.technique-card.done .technique-card__name {
+    color: var(--text-secondary);
+}
+
+.technique-card__meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.technique-card__level {
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.technique-card__duration {
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.technique-card__tries {
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+.technique-card__chevron {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s;
+}
+
+.technique-card.expanded .technique-card__chevron {
+    transform: rotate(180deg);
+}
+
+.technique-card__chevron svg {
+    width: 13px;
+    height: 13px;
+    color: var(--text-muted);
+}
+
+/* expanded detail */
+.technique-detail {
+    padding: 0 26px 22px 66px;
+    animation: fadeUp 0.25s ease;
+}
+
+.technique-detail__desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 16px;
+}
+
+.technique-detail__tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.tech-tab {
+    padding: 5px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Manrope', sans-serif;
+}
+
+.tech-tab.active {
+    background: rgba(139, 60, 255, 0.12);
+    border-color: rgba(139, 60, 255, 0.3);
+    color: var(--purple-glow);
+}
+
+.technique-detail__content {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+}
+
+.technique-detail__steps {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.technique-step {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.technique-step__num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.technique-step__text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.technique-detail__science {
+    padding: 12px 16px;
+    background: rgba(59, 130, 246, 0.05);
+    border: 1px solid rgba(59, 130, 246, 0.12);
+    border-radius: 10px;
+}
+
+.technique-detail__source {
+    margin-top: 6px;
+    font-size: 10px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.technique-detail__why {
+    padding: 12px 16px;
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px solid rgba(245, 158, 11, 0.12);
+    border-radius: 10px;
+    font-style: italic;
+}
+
+.technique-detail__why::before {
+    content: '💡 ';
+}
+
+.technique-detail__actions {
+    margin-top: 14px;
+}
+
+.technique-try-btn {
+    padding: 9px 18px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Manrope', sans-serif;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.technique-try-btn--idle {
+    background: rgba(139, 60, 255, 0.12);
+    border: 1px solid rgba(139, 60, 255, 0.3);
+    color: var(--purple-glow);
+}
+
+.technique-try-btn--idle:hover {
+    background: rgba(139, 60, 255, 0.22);
+}
+
+.technique-try-btn--done {
+    background: rgba(34, 197, 94, 0.1);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+    cursor: default;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RED THEME
+══════════════════════════════════════════════════════════ */
+.theme-red .practice-hero__glow {
+    background: radial-gradient(ellipse 50% 60% at 80% 25%, rgba(232, 48, 74, 0.18) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 50% at 20% 75%, rgba(180, 20, 40, 0.12) 0%, transparent 60%);
+}
+
+.theme-red .practice-section {
+    border-color: rgba(232, 48, 74, 0.08);
+}
+
+.theme-red .tech-tab.active {
+    background: rgba(232, 48, 74, 0.15);
+    border-color: rgba(232, 48, 74, 0.35);
+    color: var(--red-glow);
+}
+
+.theme-red .technique-try-btn--idle {
+    background: rgba(232, 48, 74, 0.12);
+    border-color: rgba(232, 48, 74, 0.3);
+    color: var(--red-glow);
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .practice-hero {
+        padding: 28px 20px 28px;
+    }
+
+    .practice-sections {
+        padding: 0 20px 60px;
+    }
+
+    .technique-detail {
+        padding-left: 20px;
+    }
+}

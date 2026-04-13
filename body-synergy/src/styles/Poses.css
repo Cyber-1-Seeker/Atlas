@@ -1,0 +1,578 @@
+/* ============================================================
+   POSES PAGE STYLES — src/styles/Poses.css
+============================================================ */
+
+.poses-page {
+    min-height: 100vh;
+    animation: fadeUp 0.4s ease both;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.poses-header {
+    padding: 48px 44px 36px;
+    position: relative;
+}
+
+.poses-header__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.poses-header__sub {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* ── FILTERS ────────────────────────────────────────────── */
+.poses-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.poses-filter-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.poses-filter-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    width: 120px;
+    flex-shrink: 0;
+}
+
+.poses-filter-pills {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.filter-pill {
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.filter-pill:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.filter-pill.active {
+    background: rgba(232, 48, 74, 0.15);
+    border-color: rgba(232, 48, 74, 0.4);
+    color: var(--red-glow);
+}
+
+.filter-pill[data-type="category"].active {
+    background: rgba(244, 114, 182, 0.12);
+    border-color: rgba(244, 114, 182, 0.35);
+    color: var(--pink);
+}
+
+.filter-pill[data-type="penetration"].active {
+    background: rgba(139, 60, 255, 0.12);
+    border-color: rgba(139, 60, 255, 0.35);
+    color: var(--purple-glow);
+}
+
+.filter-pill[data-type="clitoris"].active {
+    background: rgba(244, 114, 182, 0.12);
+    border-color: rgba(244, 114, 182, 0.35);
+    color: var(--pink);
+}
+
+.filter-pill[data-type="bdsm"].active {
+    background: rgba(232, 48, 74, 0.12);
+    border-color: rgba(232, 48, 74, 0.35);
+    color: var(--red-glow);
+}
+
+.filter-pill[data-type="toys"].active {
+    background: rgba(251, 191, 36, 0.1);
+    border-color: rgba(251, 191, 36, 0.3);
+    color: var(--gold-glow);
+}
+
+/* divider */
+.poses-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+    margin: 0 44px 32px;
+}
+
+/* results count */
+.poses-count {
+    padding: 0 44px 20px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.poses-count span {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* ── POSES GRID ─────────────────────────────────────────── */
+.poses-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 0 44px 60px;
+}
+
+/* ── POSE CARD ──────────────────────────────────────────── */
+.pose-card {
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.35s;
+}
+
+.pose-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.13);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* media area */
+.pose-card__media {
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elevated);
+}
+
+.pose-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease), opacity 0.3s;
+}
+
+.pose-card:hover .pose-card__img {
+    transform: scale(1.05);
+}
+
+/* no media placeholder */
+.pose-card__placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(139, 60, 255, 0.08), rgba(232, 48, 74, 0.08));
+}
+
+.pose-card__placeholder-icon {
+    font-size: 36px;
+    opacity: 0.3;
+}
+
+.pose-card__placeholder-text {
+    font-size: 11px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+/* difficulty badge on image */
+.pose-card__diff {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* category badge */
+.pose-card__cat {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 4px 10px;
+    border-radius: 100px;
+    font-size: 11px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(6px);
+}
+
+/* card body */
+.pose-card__body {
+    padding: 20px;
+}
+
+.pose-card__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+}
+
+.pose-card__tagline {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    font-style: italic;
+    margin-bottom: 14px;
+}
+
+/* tags row */
+.pose-card__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pose-tag {
+    padding: 3px 9px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 600;
+    border: 1px solid;
+}
+
+.pose-tag--pen {
+    background: rgba(139, 60, 255, 0.1);
+    border-color: rgba(139, 60, 255, 0.25);
+    color: var(--purple-glow);
+}
+
+.pose-tag--clit {
+    background: rgba(244, 114, 182, 0.1);
+    border-color: rgba(244, 114, 182, 0.25);
+    color: var(--pink);
+}
+
+.pose-tag--bdsm {
+    background: rgba(232, 48, 74, 0.1);
+    border-color: rgba(232, 48, 74, 0.25);
+    color: var(--red-glow);
+}
+
+.pose-tag--toys {
+    background: rgba(251, 191, 36, 0.08);
+    border-color: rgba(251, 191, 36, 0.2);
+    color: var(--gold-glow);
+}
+
+/* ── POSE DETAIL MODAL ──────────────────────────────────── */
+.pose-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 400;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 40px 20px;
+    animation: fadeIn 0.2s ease;
+}
+
+.pose-modal {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 26px;
+    width: 100%;
+    max-width: 760px;
+    overflow: hidden;
+    animation: slideUp 0.35s var(--ease);
+    margin: auto;
+}
+
+/* modal media header */
+.pose-modal__media {
+    width: 100%;
+    height: 340px;
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-elevated);
+}
+
+.pose-modal__media-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pose-modal__media video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.pose-modal__media-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 40%, rgba(26, 16, 24, 0.95) 100%);
+}
+
+/* media toggle tabs */
+.pose-modal__media-tabs {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+}
+
+.pose-modal__media-tab {
+    padding: 5px 14px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 700;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Manrope', sans-serif;
+}
+
+.pose-modal__media-tab.active,
+.pose-modal__media-tab:hover {
+    background: rgba(232, 48, 74, 0.3);
+    border-color: rgba(232, 48, 74, 0.5);
+    color: #fff;
+}
+
+/* no media placeholder in modal */
+.pose-modal__no-media {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, rgba(139, 60, 255, 0.06), rgba(232, 48, 74, 0.06));
+}
+
+.pose-modal__no-media p {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+/* close btn */
+.pose-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pose-modal__close:hover {
+    background: rgba(232, 48, 74, 0.3);
+    border-color: rgba(232, 48, 74, 0.5);
+}
+
+.pose-modal__close svg {
+    width: 16px;
+    height: 16px;
+    color: #fff;
+}
+
+/* modal body */
+.pose-modal__body {
+    padding: 28px 32px 36px;
+}
+
+.pose-modal__top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.pose-modal__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pose-modal__tagline {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 6px;
+}
+
+.pose-modal__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 24px;
+}
+
+.pose-modal__section-title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.pose-modal__desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.pose-modal__technique {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+}
+
+.pose-modal__technique-item {
+    display: flex;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+.pose-modal__technique-item:last-child {
+    border-bottom: none;
+}
+
+.pose-modal__technique-num {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(232, 48, 74, 0.12);
+    border: 1px solid rgba(232, 48, 74, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--red-glow);
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+.pose-modal__tip {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.06), rgba(232, 48, 74, 0.06));
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    border-radius: 12px;
+    padding: 16px 18px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    font-style: italic;
+    margin-bottom: 20px;
+}
+
+.pose-modal__tip::before {
+    content: '💡 ';
+}
+
+.pose-modal__training {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    border-radius: 100px;
+    background: rgba(139, 60, 255, 0.1);
+    border: 1px solid rgba(139, 60, 255, 0.25);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--purple-glow);
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.pose-modal__training:hover {
+    background: rgba(139, 60, 255, 0.18);
+}
+
+.pose-modal__training svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .poses-header {
+        padding: 28px 20px 24px;
+    }
+
+    .poses-divider {
+        margin: 0 20px 24px;
+    }
+
+    .poses-count {
+        padding: 0 20px 16px;
+    }
+
+    .poses-grid {
+        grid-template-columns: 1fr;
+        padding: 0 20px 48px;
+    }
+
+    .pose-modal__body {
+        padding: 20px 20px 28px;
+    }
+
+    .pose-modal__media {
+        height: 240px;
+    }
+}

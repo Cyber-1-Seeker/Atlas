@@ -1,0 +1,877 @@
+/* ============================================================
+   LEVELS PAGE STYLES — src/styles/Levels.css
+============================================================ */
+
+/* ══════════════════════════════════════════════════════════
+   ZONE SELECTION — первый экран выбора направления
+══════════════════════════════════════════════════════════ */
+
+.levels-home {
+    min-height: 100vh;
+    padding: 48px 40px;
+    animation: fadeUp 0.4s ease both;
+}
+
+.levels-home__header {
+    margin-bottom: 48px;
+}
+
+.levels-home__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--purple-glow), var(--pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.levels-home__sub {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* zone cards row */
+.levels-zones {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 60px;
+}
+
+.lz-card {
+    border-radius: 22px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    height: 260px;
+    transition: transform 0.35s var(--ease), box-shadow 0.35s;
+}
+
+.lz-card:hover {
+    transform: translateY(-6px) scale(1.02);
+}
+
+.lz-card[data-zone="hands"]:hover {
+    box-shadow: 0 24px 60px rgba(139, 60, 255, 0.4), 0 8px 20px rgba(139, 60, 255, 0.2);
+}
+
+.lz-card[data-zone="legs"]:hover {
+    box-shadow: 0 24px 60px rgba(232, 48, 74, 0.35), 0 8px 20px rgba(232, 48, 74, 0.18);
+}
+
+.lz-card[data-zone="groin"]:hover {
+    box-shadow: 0 24px 60px rgba(245, 158, 11, 0.3), 0 8px 20px rgba(245, 158, 11, 0.15);
+}
+
+.lz-card__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s var(--ease);
+    filter: brightness(0.4);
+}
+
+.lz-card:hover .lz-card__bg {
+    transform: scale(1.06);
+    filter: brightness(0.55);
+}
+
+.lz-card[data-zone="hands"] .lz-card__bg {
+    background: url('/images/home1.png') center/cover no-repeat, linear-gradient(135deg, #2d1040, #1a0828);
+}
+
+.lz-card[data-zone="legs"] .lz-card__bg {
+    background: url('/images/home2.png') center/cover no-repeat, linear-gradient(135deg, #1a0010, #0f0810);
+}
+
+.lz-card[data-zone="groin"] .lz-card__bg {
+    background: url('/images/home3.png') center/cover no-repeat, linear-gradient(135deg, #2a1505, #1a0f02);
+}
+
+.lz-card__glow {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.35s;
+    pointer-events: none;
+}
+
+.lz-card[data-zone="hands"] .lz-card__glow {
+    background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(139, 60, 255, 0.4) 0%, transparent 70%);
+}
+
+.lz-card[data-zone="legs"] .lz-card__glow {
+    background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(232, 48, 74, 0.4) 0%, transparent 70%);
+}
+
+.lz-card[data-zone="groin"] .lz-card__glow {
+    background: radial-gradient(ellipse 80% 80% at 50% 100%, rgba(245, 158, 11, 0.35) 0%, transparent 70%);
+}
+
+.lz-card:hover .lz-card__glow {
+    opacity: 1;
+}
+
+.lz-card__content {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+}
+
+.lz-card__emoji {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.lz-card__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.lz-card__desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* progress bar on zone card */
+.lz-card__progress {
+    margin-top: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.lz-card__prog-track {
+    flex: 1;
+    height: 3px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+}
+
+.lz-card__prog-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.6s var(--ease);
+}
+
+.lz-card[data-zone="hands"] .lz-card__prog-fill {
+    background: var(--purple-glow);
+    box-shadow: 0 0 8px var(--purple);
+}
+
+.lz-card[data-zone="legs"] .lz-card__prog-fill {
+    background: var(--red-glow);
+    box-shadow: 0 0 8px var(--red);
+}
+
+.lz-card[data-zone="groin"] .lz-card__prog-fill {
+    background: var(--gold-glow);
+    box-shadow: 0 0 8px var(--gold);
+}
+
+.lz-card__prog-pct {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   SUBDIRECTIONS — второй экран выбора поднаправления
+══════════════════════════════════════════════════════════ */
+
+.subdirs-page {
+    min-height: 100vh;
+    animation: fadeUp 0.4s ease both;
+}
+
+/* hero banner at top */
+.subdirs-hero {
+    position: relative;
+    height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 40px;
+    overflow: hidden;
+}
+
+.subdirs-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center top;
+    filter: brightness(0.28);
+}
+
+.subdirs-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 0%, var(--bg-deep) 100%);
+}
+
+/* LVL badge */
+.subdirs-hero__badge {
+    position: relative;
+    z-index: 2;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+}
+
+.subdirs-hero__name {
+    position: relative;
+    z-index: 2;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    font-size: 52px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 40px rgba(0, 0, 0, 0.8);
+    margin-bottom: 12px;
+    font-style: italic;
+}
+
+.subdirs-hero__tagline {
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 520px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+/* back button */
+.subdirs-back {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    z-index: 10;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.2s;
+    background: none;
+    border: none;
+    font-family: 'Manrope', sans-serif;
+}
+
+.subdirs-back:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.subdirs-back svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* sub-direction cards grid */
+.subdirs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    padding: 32px 40px 48px;
+}
+
+.sd-card {
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--bg-card);
+    padding: 28px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s var(--ease), border-color 0.3s, box-shadow 0.3s;
+}
+
+.sd-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.14);
+}
+
+/* dim bg image that reveals on hover */
+.sd-card__bg-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+    filter: brightness(0.22);
+}
+
+.sd-card:hover .sd-card__bg-img {
+    opacity: 1;
+}
+
+/* color overlay on image */
+.sd-card__bg-color {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.45s var(--ease);
+}
+
+.sd-card:hover .sd-card__bg-color {
+    opacity: 1;
+}
+
+.sd-card__content {
+    position: relative;
+    z-index: 2;
+}
+
+.sd-card__top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.sd-card__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.sd-card:hover .sd-card__icon {
+    transform: scale(1.1);
+}
+
+.sd-card__name {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.sd-card__desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* level pills row */
+.sd-card__levels {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 16px;
+}
+
+.sd-level-pill {
+    padding: 3px 10px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border: 1px solid;
+}
+
+.sd-level-pill--done {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.3);
+    color: #4ade80;
+}
+
+.sd-level-pill--active {
+    background: rgba(232, 48, 74, 0.12);
+    border-color: rgba(232, 48, 74, 0.35);
+    color: var(--red-glow);
+}
+
+.sd-level-pill--locked {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-muted);
+}
+
+/* arrow on card */
+.sd-card__arrow {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s;
+}
+
+.sd-card:hover .sd-card__arrow {
+    background: rgba(255, 255, 255, 0.14);
+    transform: translateX(3px);
+}
+
+.sd-card__arrow svg {
+    width: 14px;
+    height: 14px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* ══════════════════════════════════════════════════════════
+   LEVEL DETAIL — список уровней конкретного поднаправления
+══════════════════════════════════════════════════════════ */
+
+.levellist-page {
+    min-height: 100vh;
+    animation: fadeUp 0.4s ease both;
+    position: relative;
+}
+
+/* full-screen background */
+.levellist-hero {
+    position: relative;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 44px;
+    overflow: hidden;
+}
+
+.levellist-hero__bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center 20%;
+    filter: brightness(0.25);
+}
+
+.levellist-hero__silhouette {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    opacity: 0.12;
+    background-size: contain;
+    background-position: right center;
+    background-repeat: no-repeat;
+}
+
+.levellist-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10, 6, 8, 0.3) 0%, var(--bg-deep) 100%);
+}
+
+.levellist-hero__lvl-badge {
+    position: relative;
+    z-index: 2;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    background: rgba(10, 6, 8, 0.7);
+    backdrop-filter: blur(10px);
+    margin-bottom: 18px;
+}
+
+.levellist-hero__name {
+    position: relative;
+    z-index: 2;
+    font-family: 'Georgia', serif;
+    font-size: 42px;
+    font-weight: 700;
+    font-style: italic;
+    color: #fff;
+    margin-bottom: 10px;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.9);
+    text-align: center;
+}
+
+.levellist-hero__desc {
+    position: relative;
+    z-index: 2;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.55);
+    max-width: 500px;
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 20px;
+}
+
+/* back row at bottom */
+.levellist-footer {
+    position: fixed;
+    bottom: 0;
+    left: var(--sidebar-w);
+    right: 0;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to top, rgba(10, 6, 8, 0.98) 60%, transparent);
+    z-index: 50;
+}
+
+.levellist-footer__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Manrope', sans-serif;
+    border: none;
+}
+
+.levellist-footer__btn--back {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--text-secondary);
+}
+
+.levellist-footer__btn--back:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.levellist-footer__btn--body {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-secondary);
+}
+
+.levellist-footer__btn--body:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.levellist-footer__btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+/* levels list */
+.levellist-cards {
+    padding: 28px 40px 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+/* ---- LEVEL CARD ---- */
+.lvl-card {
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    background: var(--bg-card);
+    padding: 28px 32px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+}
+
+.lvl-card--done {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.lvl-card--active {
+    border-color: rgba(232, 48, 74, 0.25);
+}
+
+.lvl-card--locked {
+    opacity: 0.55;
+}
+
+/* top row: badge + time + status */
+.lvl-card__top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.lvl-card__badge {
+    padding: 3px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.lvl-card__time {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.lvl-card__time svg {
+    width: 13px;
+    height: 13px;
+}
+
+.lvl-card__status {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.lvl-card__status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.lvl-card--active .lvl-card__status {
+    color: var(--red-glow);
+}
+
+.lvl-card--active .lvl-card__status-dot {
+    background: var(--red);
+    box-shadow: 0 0 6px var(--red);
+    animation: sessionBlink 2s infinite;
+}
+
+.lvl-card--done .lvl-card__status {
+    color: #4ade80;
+}
+
+.lvl-card--done .lvl-card__status-dot {
+    background: #22c55e;
+}
+
+.lvl-card--locked .lvl-card__status {
+    color: var(--text-muted);
+}
+
+.lvl-card--locked .lvl-card__status-dot {
+    background: var(--text-muted);
+}
+
+/* two-column layout */
+.lvl-card__body {
+    display: grid;
+    grid-template-columns: 1fr 280px;
+    gap: 32px;
+    align-items: start;
+}
+
+.lvl-card__name {
+    font-family: 'Georgia', serif;
+    font-size: 26px;
+    font-weight: 700;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+}
+
+.lvl-card__desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 14px;
+}
+
+.lvl-card__tip {
+    font-size: 12px;
+    color: var(--text-muted);
+    font-style: italic;
+    line-height: 1.6;
+    padding-left: 12px;
+    border-left: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* right column: progress + button */
+.lvl-card__right {
+}
+
+.lvl-card__prog-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.lvl-card__prog-pct {
+    font-weight: 700;
+}
+
+.lvl-card__prog-track {
+    height: 5px;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.lvl-card__prog-fill {
+    height: 100%;
+    border-radius: 100px;
+    transition: width 0.6s var(--ease);
+}
+
+.lvl-card--done .lvl-card__prog-fill {
+    background: var(--purple-glow);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+.lvl-card--active .lvl-card__prog-fill {
+    background: var(--red-glow);
+    box-shadow: 0 0 10px rgba(232, 48, 74, 0.5);
+}
+
+.lvl-card--locked .lvl-card__prog-fill {
+    background: var(--text-muted);
+}
+
+/* action button */
+.lvl-card__btn {
+    width: 100%;
+    padding: 13px 20px;
+    border-radius: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.22s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+}
+
+.lvl-card__btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.lvl-card__btn--ghost {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.lvl-card__btn--ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.lvl-card__btn--primary {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(232, 48, 74, 0.4);
+}
+
+.lvl-card__btn--primary:hover {
+    background: var(--red-glow);
+    box-shadow: 0 6px 28px rgba(232, 48, 74, 0.55);
+    transform: translateY(-1px);
+}
+
+.lvl-card__btn--locked {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+    .lvl-card__body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .levels-zones {
+        grid-template-columns: 1fr;
+    }
+
+    .subdirs-grid {
+        grid-template-columns: 1fr;
+        padding: 20px;
+    }
+
+    .levellist-cards {
+        padding: 20px 20px 100px;
+    }
+
+    .levels-home {
+        padding: 28px 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .subdirs-hero__name {
+        font-size: 36px;
+    }
+
+    .levellist-hero__name {
+        font-size: 30px;
+    }
+
+    .lvl-card__name {
+        font-size: 20px;
+    }
+
+    .levellist-footer {
+        left: var(--sidebar-w);
+        padding: 16px 20px;
+    }
+}

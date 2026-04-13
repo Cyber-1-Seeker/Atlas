@@ -1,0 +1,394 @@
+/* ============================================================
+   TIPS PAGE STYLES — src/styles/Tips.css
+============================================================ */
+
+.tips-page {
+    min-height: 100vh;
+    padding: 0;
+    animation: fadeUp 0.4s ease both;
+}
+
+/* ── HEADER ─────────────────────────────────────────────── */
+.tips-header {
+    padding: 48px 44px 0;
+    margin-bottom: 44px;
+}
+
+.tips-header__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--blue-glow), var(--purple-glow));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+}
+
+.tips-header__sub {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* ── DAILY FOCUS ────────────────────────────────────────── */
+.daily-focus {
+    margin: 0 44px 48px;
+    border-radius: 24px;
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, rgba(232, 48, 74, 0.1) 0%, rgba(139, 60, 255, 0.12) 50%, rgba(59, 130, 246, 0.08) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.daily-focus::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 80% 50%, rgba(232, 48, 74, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.daily-focus__label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-glow);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.daily-focus__label::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--red);
+    box-shadow: 0 0 8px var(--red);
+    animation: sessionBlink 2s infinite;
+}
+
+.daily-focus__icon {
+    font-size: 36px;
+    margin-bottom: 12px;
+}
+
+.daily-focus__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+}
+
+.daily-focus__text {
+    font-size: 15px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.daily-focus__refresh {
+    position: absolute;
+    top: 28px;
+    right: 28px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Manrope', sans-serif;
+}
+
+.daily-focus__refresh:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.daily-focus__refresh svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* ── SECTIONS GRID ──────────────────────────────────────── */
+.tips-sections {
+    padding: 0 44px 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+}
+
+.tips-section__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.tips-section__title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.08), transparent);
+}
+
+/* ── WHY IT WORKS — horizontal scroll ──────────────────── */
+.why-scroll {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scrollbar-width: none;
+}
+
+.why-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+.why-card {
+    flex-shrink: 0;
+    width: 280px;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 18px;
+    padding: 24px;
+    transition: border-color 0.3s, transform 0.3s;
+}
+
+.why-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+    transform: translateY(-3px);
+}
+
+.why-card__icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+}
+
+.why-card__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-primary);
+}
+
+.why-card__text {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+}
+
+.why-card__source {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+/* ── TIPS GRID ──────────────────────────────────────────── */
+.tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 14px;
+}
+
+.tip-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.tip-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.tip-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--tip-color, var(--purple-glow));
+    opacity: 0.7;
+}
+
+.tip-card__top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.tip-card__icon {
+    font-size: 22px;
+}
+
+.tip-card__category {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--tip-color, var(--purple-glow));
+}
+
+.tip-card__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.tip-card__text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+/* ── SCENARIOS ──────────────────────────────────────────── */
+.scenarios-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.scenario-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.scenario-card:hover {
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.scenario-card.open {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.scenario-card__header {
+    padding: 24px 28px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.scenario-card__mood {
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    border: 1px solid;
+    flex-shrink: 0;
+}
+
+.scenario-card__title {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    flex: 1;
+}
+
+.scenario-card__meta {
+    font-size: 11px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.scenario-card__preview {
+    font-size: 13px;
+    color: var(--text-muted);
+    padding: 0 28px 20px;
+    font-style: italic;
+}
+
+.scenario-card__chevron {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+}
+
+.scenario-card.open .scenario-card__chevron {
+    transform: rotate(180deg);
+}
+
+.scenario-card__chevron svg {
+    width: 14px;
+    height: 14px;
+    color: var(--text-muted);
+}
+
+.scenario-card__body {
+    padding: 0 28px 28px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    animation: fadeUp 0.3s ease;
+}
+
+.scenario-card__text {
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.9;
+    white-space: pre-line;
+    padding-top: 22px;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .tips-header {
+        padding: 28px 20px 0;
+    }
+
+    .daily-focus {
+        margin: 0 20px 36px;
+        padding: 24px 22px;
+    }
+
+    .tips-sections {
+        padding: 0 20px 48px;
+    }
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .daily-focus__refresh {
+        position: static;
+        margin-top: 16px;
+        display: inline-flex;
+    }
+}
