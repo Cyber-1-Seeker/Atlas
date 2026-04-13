@@ -1,0 +1,110 @@
+/* ================================================================
+   CORE LAYOUT — управляется CSS, не JS
+   ================================================================ */
+
+:root {
+    --sidebar-w: 260px;
+}
+
+.tp-sidebar {
+    display: flex;
+}
+
+.tp-bottomnav {
+    display: none;
+}
+
+.tp-content {
+    margin-left: var(--sidebar-w);
+    padding: 32px;
+    min-height: 100vh;
+    flex: 1;
+    max-width: 100%;
+    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: margin-left 0.25s ease;
+}
+
+/* SHOW/HIDE helpers */
+.mobile-only {
+    display: none !important;
+}
+
+.desktop-only {
+    display: block;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+    /* sidebar полностью скрыт */
+    .tp-sidebar {
+        display: none !important; /* скрываем sidebar */
+    }
+
+    /*!* снизу появляется навигация *!*/
+    .tp-bottomnav {
+        display: flex !important;
+    }
+
+     /*контент растягивается на всю ширину */
+    .tp-content {
+        margin-left: 0 !important;
+        padding: 0 0 70px 0 !important;
+        width: 100% !important;
+    }
+
+    .mobile-only {
+        display: block !important;
+    }
+
+    .desktop-only {
+        display: none !important;
+    }
+
+    /* модалки на мобилке */
+    .ant-modal {
+        max-width: calc(100vw - 24px) !important;
+        margin: 12px auto !important;
+        top: 16px !important;
+    }
+
+    body, #root {
+        overflow-x: hidden;
+        width: 100%;
+    }
+}
+
+/* ================================================================
+   NODE HANDLES — показываем при наведении на нод
+   ================================================================ */
+.node-handle {
+    opacity: 0 !important;
+    transition: opacity 0.15s !important;
+}
+
+.react-flow__node:hover .node-handle {
+    opacity: 1 !important;
+}
+
+.react-flow__node.selected .node-handle {
+    opacity: 0.7 !important;
+}
+
+/* ================================================================
+   REACT FLOW EDGE
+   ================================================================ */
+.react-flow__edge-path {
+    stroke-width: 2;
+}
+
+
+/* Progress — 1 колонка на очень маленьких экранах */
+@media (max-width: 527px) {
+    .progress-grid {
+        grid-template-columns: 1fr !important;
+    }
+    /* Отступ сверху в Progress на мобиле */
+    .progress-page-root {
+        padding-top: 16px !important;
+    }
+}

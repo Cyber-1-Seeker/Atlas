@@ -1,0 +1,13 @@
+[core]
+	repositoryformatversion = 0
+	filemode = false
+	bare = false
+	logallrefupdates = true
+	symlinks = false
+	ignorecase = true
+[remote "Cyber-1-Seeker"]
+	url = https://github.com/Cyber-1-Seeker/productivity
+	fetch = +refs/heads/*:refs/remotes/Cyber-1-Seeker/*
+[branch "main"]
+	remote = Cyber-1-Seeker
+	merge = refs/heads/main

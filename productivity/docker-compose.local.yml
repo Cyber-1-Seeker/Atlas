@@ -1,0 +1,82 @@
+# docker-compose.local.yml — локальный запуск через Docker для проверки.
+# Обычный запуск (npm run dev + python manage.py runserver) НЕ затрагивается.
+#
+# Использование:
+#   docker compose -f docker-compose.local.yml up --build
+#   docker compose -f docker-compose.local.yml down
+#   docker compose -f docker-compose.local.yml down -v   # удалить и данные БД
+
+services:
+
+  # ── PostgreSQL ──────────────────────────────────────────────────
+  db:
+    image: postgres:15
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB:       productivity_local
+      POSTGRES_USER:     postgres
+      POSTGRES_PASSWORD: localpassword
+    volumes:
+      - pg_local_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ── Django backend ──────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SECRET_KEY: local-dev-secret-key-not-for-production
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost,127.0.0.1,backend"
+      DB_NAME:     productivity_local
+      DB_USER:     postgres
+      DB_PASSWORD: localpassword
+      DB_HOST:     db
+      DB_PORT:     "5432"
+      CORS_ALLOWED_ORIGINS: "http://localhost:5173,http://localhost"
+    # Запускаем миграции + сервер
+    command: >
+      sh -c "python manage.py migrate &&
+      python manage.py collectstatic --noinput &&
+      exec gunicorn config.wsgi:application --bind=0.0.0.0:8000 --workers=2 --reload"
+    ports:
+      - "8000:8000"
+    volumes:
+      # hot-reload для разработки — монтируем исходники
+      - ./backend:/app
+      - /app/staticfiles    # исключаем staticfiles из маппинга
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/admin/login/')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  # ── React frontend (dev server) ─────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend.dev      # отдельный dev Dockerfile ниже
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      VITE_API_URL: http://localhost:8000/api
+    ports:
+      - "5173:5173"
+    volumes:
+      # hot-reload — монтируем src
+      - ./frontend:/app
+      - /app/node_modules   # исключаем node_modules из маппинга
+
+volumes:
+  pg_local_data:

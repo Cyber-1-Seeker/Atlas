@@ -1,0 +1,24 @@
+# docker-compose.build.yml
+# Только для локальной сборки и пуша в Docker Hub
+# Запуск: docker compose -f docker-compose.build.yml build && docker compose -f docker-compose.build.yml push
+
+version: '3.9'
+
+services:
+
+  backend:
+    image: sensh1/realty-app:backend-latest
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    # Пушить после сборки
+    # docker compose -f docker-compose.build.yml push
+
+  frontend:
+    image: sensh1/realty-app:frontend-latest
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+      args:
+        # Сразу продакшн URL API сервера
+        VITE_API_URL: http://147.45.224.189:70/api
